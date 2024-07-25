@@ -1,0 +1,29 @@
+:root {
+    --shaddow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+}
+
+body{
+    background-color: rgba(232,233,239,1);
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* ------------------  Register Page ------------------ */
+
+#form-container{
+    width: 400px;
+    box-shadow:var(--shaddow);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+#logo{
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+}
