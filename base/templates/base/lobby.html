@@ -1,16 +1,32 @@
 {% extends 'base/main.html' %}
-{%load static%}
-{%block content%}
-
+{% load static %}
+{% block content %}
 
 <main>
     <section id="form-container">
-        <img id="logo" src="{%static 'images/chat-icon.png' %}"/>
+        <img id="logo" src="{% static 'images/chat-icon.png' %}" alt="Chat Logo"/>
 
         <div>
-            <h1> Welcome to MY Chat</h1>
-            <p> A group video Chat</p>
+            <h1>Welcome to MY Chat</h1>
+            <p>A group video Chat</p>
         </div>
+        <form id="form">
+            <div class="form-field">
+                <input type="submit" value="Join Stream" />
+            </div>
+        </form>
+
+        <script type="text/javascript">
+            let form = document.getElementById('form');
+
+            let handleSubmit = async (e) => {
+                e.preventDefault();
+                window.open('/room/', '_self');
+            }
+
+            form.addEventListener('submit', handleSubmit);
+        </script>
     </section>
-    {% endblock content %}
 </main>
+
+{% endblock content %}
