@@ -1,6 +1,10 @@
+/* ------------------  Global Styling ------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+
+
 :root {
     --shaddow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
-}
+  }
 
 body{
     background-color: rgba(232,233,239,1);
@@ -28,8 +32,61 @@ body{
     margin: 0 auto;
 }
 
-/*room styling */
+#welcome-message{
+    text-align: center;
+    margin-bottom: 20px;
+}
 
+#welcome-message h1{
+    font-size: 36px;
+}
+
+
+#welcome-message p{
+    font-size: 16px;
+    color: rgb(97, 98, 105);
+    font-weight: 300;
+}
+
+.form-field{
+    margin-bottom: 20px;
+}
+
+.form-field label{
+    font-size: 16px;
+    line-height: 1.7em;
+}
+
+.form-field input{
+    width: 100%;
+    border:2px solid rgba(198,202,219,1);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-field input[type='submit']{
+    background-color: rgb(75, 93, 172);
+    border:none;
+    color: #fff;
+}
+
+
+@media screen and (max-width:450px) {
+    #form-container{
+        width: 95%;
+
+    }
+
+    #welcome-message h1{
+        font-size: 24px;
+    }
+    
+}
+
+
+/* ----------------- Room Styling ------------------*/
 #room-name-wrapper{
     text-align: center;
     font-size: 18px;
@@ -82,4 +139,31 @@ body{
         flex-basis: 300px;
         min-height: 200px;
     }
+}
+
+
+/* ----------------- Room Styling | Controls ------------------*/
+
+#controls-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    column-gap: 1em;
+    position: fixed;
+    bottom: 20px;
+}
+
+.controls-icon {
+    /* Fixed the class name from control-icon to controls-icon */
+    height: 20px;
+    width: 20px;
+    box-shadow: var(--shadow); /* Note: Ensure var(--shadow) is defined elsewhere in your CSS */
+    background-color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#leave-btn {
+    background-color: rgb(255, 80, 80, 1);
 }

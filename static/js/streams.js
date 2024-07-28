@@ -9,7 +9,7 @@ console.log("streams.js connected");
 const client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' });
 
 // Local tracks for audio and video
-let localTracks = [];
+let localTracks = [null, null];  // Initialize with null for audio and video
 let remoteUsers = {};
 
 // Function to join and display local stream
@@ -29,7 +29,7 @@ let joinAndDisplayLocalStream = async () => {
         let player = `
             <div class="video-container" id="user-container-${UID}">
                 <div class="username-wrapper">
-                    <span class="user-name">MY Name</span> <!-- Optionally replace with a dynamic user name -->
+                    <span class="user-name">${UID}</span> <!-- Optionally replace with a dynamic user name -->
                 </div>
                 <div class="video-player" id="user-${UID}"></div>
             </div>`;
@@ -67,7 +67,7 @@ let handleUserJoined = async (user, mediaType) => {
         player = `
             <div class="video-container" id="user-container-${user.uid}">
                 <div class="username-wrapper">
-                    <span class="user-name">MY Name</span> <!-- Optionally replace with a dynamic user name -->
+                    <span class="user-name">${user.uid}</span> <!-- Optionally replace with a dynamic user name -->
                 </div>
                 <div class="video-player" id="user-${user.uid}"></div>
             </div>`;
@@ -75,14 +75,18 @@ let handleUserJoined = async (user, mediaType) => {
         // Insert remote user video player into the DOM
         document.getElementById('video-streams').insertAdjacentHTML('beforeend', player);
         
-        // Play the remote user's video track
-        user.videoTrack.play(`user-${user.uid}`);
+        // Play the remote user's video track if available
+        if (user.videoTrack) {
+            user.videoTrack.play(`user-${user.uid}`);
+        }
     }
 
     // Check if the media type is audio
     if (mediaType === 'audio') {
-        // Play the remote user's audio track
-        user.audioTrack.play();
+        // Play the remote user's audio track if available
+        if (user.audioTrack) {
+            user.audioTrack.play();
+        }
     }
 };
 
@@ -97,5 +101,45 @@ let handleUserLeft = (user) => {
     delete remoteUsers[user.uid];
 };
 
+let leaveAndRemoveLocalStream = async () => {
+    for (let i = 0; i < localTracks.length; i++) {
+        if (localTracks[i]) {
+            localTracks[i].stop();
+            localTracks[i].close();
+        }
+    }
+
+    await client.leave();
+    window.open('/', '_self'); // Redirect to the home page after leaving
+
+};
+
+let toggleCamera = async (e) => {
+    console.log('TOGGLE CAMERA TRIGGERED')
+    if(localTracks[1].muted){
+        await localTracks[1].setMuted(false)
+        e.target.style.backgroundColor = '#fff'
+    }else{
+        await localTracks[1].setMuted(true)
+        e.target.style.backgroundColor = 'rgb(255, 80, 80, 1)'
+    }
+}
+
+
+let toggleMic = async (e) => {
+    console.log('TOGGLE MIC TRIGGERED')
+    if(localTracks[0].muted){
+        await localTracks[0].setMuted(false)
+        e.target.style.backgroundColor = '#fff'
+    }else{
+        await localTracks[0].setMuted(true)
+        e.target.style.backgroundColor = 'rgb(255, 80, 80, 1)'
+    }
+}
+
+
 // Call the function to join and display the local stream
 joinAndDisplayLocalStream();
+document.getElementById('leave-btn').addEventListener('click', leaveAndRemoveLocalStream);
+document.getElementById('camera-btn').addEventListener('click', toggleCamera);
+document.getElementById('mic-btn').addEventListener('click', toggleMic)
