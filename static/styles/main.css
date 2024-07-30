@@ -144,7 +144,7 @@ body{
 
 /* ----------------- Room Styling | Controls ------------------*/
 
-#controls-wrapper {
+#controls-wrapper{
     display: flex;
     width: 100%;
     justify-content: center;
@@ -153,17 +153,17 @@ body{
     bottom: 20px;
 }
 
-.controls-icon {
-    /* Fixed the class name from control-icon to controls-icon */
+.control-icon{
     height: 20px;
     width: 20px;
-    box-shadow: var(--shadow); /* Note: Ensure var(--shadow) is defined elsewhere in your CSS */
+    box-shadow: var(--shaddow);
     background-color: #fff;
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
+
 }
 
-#leave-btn {
+#leave-btn{
     background-color: rgb(255, 80, 80, 1);
 }
