@@ -1,6 +1,7 @@
 asgiref==3.8.1
+agora_token_builder==1.0.0
 dj-database-url==2.2.0
 Django==5.0.6
 psycopg2==2.9.9
-gunicorn>=20.0.0
+gunicorn==20.0.0
 sqlparse==0.4.4
